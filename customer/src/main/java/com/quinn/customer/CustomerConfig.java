@@ -19,8 +19,8 @@ public class CustomerConfig {
     @Bean
     public RestTemplate CreateRestTemplate(RestTemplateBuilder builder) {
         final RestTemplateBuilder restTemplateBuilder = builder
-                .setConnectTimeout(Duration.ofMillis(10))
-                .setReadTimeout(Duration.ofMillis(10));
+                .setConnectTimeout(Duration.ofMillis(3000))
+                .setReadTimeout(Duration.ofMillis(3000));
 
         final RestTemplate restTemplate = restTemplateBuilder.build();
 

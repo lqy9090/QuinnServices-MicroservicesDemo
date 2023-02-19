@@ -125,7 +125,6 @@ class CustomerServiceTestWithMockito {
                         "http://localhost:8081/api/v1/fraud-check/{customerId}",//打桩
                         FraudCheckResponse.class,
                         customer.getId()))
-                .thenCallRealMethod()
                 .thenThrow(new ResourceAccessException("Read timed out", new SocketTimeoutException("Read timed out")));
 
         //when

@@ -36,7 +36,7 @@ public record CustomerService(CustomerRepository repository, RestTemplate restTe
             if (fraudCheckResponse.isFraudulent()) {
                 throw new IllegalStateException("Request is fraudulent");
             }
-        } catch (ResourceAccessException e) {
+        } catch (ResourceAccessException e) { //重试机制
             if (e.getCause() instanceof SocketTimeoutException)
                 throw new IllegalStateException("Request is timeout");
 

@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.SocketTimeoutException;
@@ -35,8 +36,8 @@ class CustomerServiceTest {
     @BeforeEach
     void setUp() {
         restTemplate = new RestTemplateBuilder()
-                .setConnectTimeout(Duration.ofMillis(3000))
-                .setReadTimeout(Duration.ofMillis(3000))
+                .setConnectTimeout(Duration.ofMillis(30))
+                .setReadTimeout(Duration.ofMillis(30))
                 .build();
         underTest = new CustomerService(customerRepository, restTemplate);
     }
@@ -69,14 +70,14 @@ class CustomerServiceTest {
         );
 
 //        long startMillis = System.currentTimeMillis();
-//
-////        Throwable throwable = catchThrowable(() -> {
+
+//        Throwable throwable = catchThrowable(() -> {
 //            restTemplate.getForObject(
 //                            "http://localhost:8081/api/v1/fraud-check/{customerId}",//打桩
 //                            FraudCheckResponse.class,
 //                            1L);
-////                }
-////        );
+//                }
+//        );
 //        long endMillis = System.currentTimeMillis();
 //        System.out.println("Execution time: " + (endMillis - startMillis));
 //        assertThat(throwable).hasRootCauseInstanceOf(SocketTimeoutException.class);
